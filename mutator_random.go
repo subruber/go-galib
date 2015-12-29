@@ -14,11 +14,11 @@ import (
 	"math/rand"
 )
 
-type GAMutatorRandom struct{}
+type GARandomMutator struct{}
 
 // Mutate returns a genome which is identical to the given one except for one
 // gene, which is replaced with a random one.
-func (m GAMutatorRandom) Mutate(a GAGenome) GAGenome {
+func (m GARandomMutator) Mutate(a GAGenome) GAGenome {
 	r := a.Copy()
 	r.Randomize()
 	p := rand.Intn(a.Len())
@@ -27,4 +27,4 @@ func (m GAMutatorRandom) Mutate(a GAGenome) GAGenome {
 	ac.Splice(r, p, p, 1)
 	return ac
 }
-func (m GAMutatorRandom) String() string { return "GAMutatorRandom" }
+func (m GARandomMutator) String() string { return "GARandomMutator" }
