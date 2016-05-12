@@ -7,12 +7,18 @@ Install
 	$ go install git://github.com/thoj/go-galib.git
 
 Compiling examples:
-        $ git clone git://github.com/thoj/go-galib.git
-        $ cd go-galib
+
+    $ git clone git://github.com/thoj/go-galib.git
+    $ cd go-galib
 	$ cd examples
 	$ go build floating.go
-        $ ./floating
+    $ ./floating
 
 Use
 --------
 See example/*
+
+
+Doc
+---
+[https://godoc.org/github.com/thoj/go-galib](https://godoc.org/github.com/thoj/go-galib)
