@@ -9,7 +9,7 @@ go-galib selectors
 package ga
 
 import (
-	"math"
+	//	"log"
 	"math/rand"
 	"sort"
 )
@@ -44,18 +44,23 @@ func (s *GATournamentSelector) SelectOne(pop GAGenomes) GAGenome {
 	}
 	g := make(GAGenomes, s.Contestants)
 	l := len(pop)
-	//fmt.Printf("Length = %d, Contestants = %d\n", l, len(g));
 	for i := 0; i < s.Contestants; i++ {
 		g[i] = pop[rand.Intn(l)]
 	}
 	sort.Sort(g)
-	//fmt.Printf("%+v\n", g);
 	r := rand.Float64()
+	p := s.PElite
 	for i := 0; i < s.Contestants-1; i++ {
-		if s.PElite*math.Pow((float64(1)-s.PElite), float64(i+1)) < r {
+		if r < p {
+			//	log.Printf("Selected %v with probability %v < %v", i, r, p)
 			return g[i]
+		} else {
+			//	log.Printf("NOT Selected %v with probability %v >= %v", i, r, p)
 		}
+
+		p = p + p*(float64(1)-s.PElite)
 	}
+	//	log.Printf("Selected %v (fallback)", s.Contestants-1)
 	return g[s.Contestants-1]
 }
 func (s *GATournamentSelector) String() string {

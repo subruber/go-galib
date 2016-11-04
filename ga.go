@@ -59,18 +59,15 @@ func (ga *GA) Optimize(gen int) {
 		for p := 0; p < l; p++ {
 			//Breed two inviduals selected with selector.
 			if ga.Parameter.PBreed > rand.Float64() {
-				children := make(GAGenomes, 2)
-				children[0], children[1] = ga.Parameter.Breeder.Breed(
+				c1, c2 := ga.Parameter.Breeder.Breed(
 					ga.Parameter.Selector.SelectOne(ga.pop),
 					ga.Parameter.Selector.SelectOne(ga.pop))
-
-				ga.pop = AppendGenomes(ga.pop, children)
+				ga.pop = append(ga.pop, c1, c2)
 			}
 			//Mutate
 			if ga.Parameter.PMutate > rand.Float64() {
-				children := make(GAGenomes, 1)
-				children[0] = ga.Parameter.Mutator.Mutate(ga.pop[p])
-				ga.pop = AppendGenomes(ga.pop, children)
+				c := ga.Parameter.Mutator.Mutate(ga.pop[p])
+				ga.pop = append(ga.pop, c)
 			}
 		}
 		//cleanup remove some from pop

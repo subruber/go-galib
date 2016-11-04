@@ -79,3 +79,19 @@ func TestMultiMutatorEqualProbability(t *testing.T) {
 		}
 	}
 }
+
+func TestMultiMutatorWeighted(t *testing.T) {
+	tests := []struct {
+		weights   []float64
+		iters     int64
+		threshold float64
+	}{
+		{
+			weights:   []float64{1, 1, 1},
+			iters:     100000,
+			threshold: 0.95,
+		},
+	}
+	for _, test := range tests {
+
+}
