@@ -15,10 +15,10 @@ import (
 	"time"
 )
 
-var scores int
+var calls int
 
 func ackley(g *ga.GAFloatGenome) float64 {
-	scores++
+	calls++
 	var sum1 float64 = 0.0
 	for _, c := range g.Gene {
 		sum1 += float64(c * c)
@@ -33,7 +33,7 @@ func ackley(g *ga.GAFloatGenome) float64 {
 }
 
 func rosenbrock(g *ga.GAFloatGenome) float64 {
-	scores++
+	calls++
 	var sum float64
 	for i := 1; i < len(g.Gene); i++ {
 		sum += 100.0*math.Pow(math.Pow(g.Gene[i]-g.Gene[i-1], 2), 2) + math.Pow(1-g.Gene[i-1], 2)
@@ -64,5 +64,5 @@ func main() {
 
 	best := gao.Best().(*ga.GAFloatGenome)
 	fmt.Printf("%s = %f\n", best, best.Score())
-	fmt.Printf("Calls to score = %d\n", scores)
+	fmt.Printf("Calls to get the best score = %d\n", scores)
 }
